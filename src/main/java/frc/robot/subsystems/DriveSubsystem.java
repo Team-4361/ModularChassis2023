@@ -28,4 +28,7 @@ public class DriveSubsystem extends SubsystemBase{
 
     }
     
+    public void tankDrive(double leftInput, double rightInput){
+        drive.tankDrive(leftInput, rightInput);
+    }
 }

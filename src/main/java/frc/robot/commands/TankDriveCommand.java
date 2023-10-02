@@ -16,6 +16,7 @@ public class TankDriveCommand extends CommandBase{
     }
     @Override
     public void execute(){
+        Robot.driveSubsystem.tankDrive(Robot.leftStick.getY(), Robot.rightStick.getY());
 
     }
     @Override
