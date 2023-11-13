@@ -7,11 +7,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.MotorSubsystem;
+
+import static frc.robot.Constants.*;
 
 
 /**
@@ -24,6 +28,11 @@ public class Robot extends TimedRobot {
     public static DriveSubsystem driveSubsystem;
     public static CommandJoystick leftStick, rightStick;
     public static CommandXboxController xbox;
+    public static RobotMode mode;
+    private SendableChooser<RobotMode> chooser;
+
+    public static MotorSubsystem modTalon1, modTalon2, modTalon3, modTalon4;
+
     /**
      * This method is run when the robot is first started up and should be used for any
      * initialization code.
@@ -36,6 +45,21 @@ public class Robot extends TimedRobot {
         rightStick = new CommandJoystick(Constants.RIGHT_STICK);
         xbox = new CommandXboxController(Constants.XBOX_CONTROLLER);
         driveSubsystem = new DriveSubsystem();
+
+        modTalon1 = new MotorSubsystem(MOD_TALON_1);
+        modTalon2 = new MotorSubsystem(MOD_TALON_2);
+        modTalon3 = new MotorSubsystem(MOD_TALON_3);
+        modTalon4 = new MotorSubsystem(MOD_TALON_4);
+
+        mode = RobotMode.ROMULUS;
+
+        chooser = new SendableChooser<>();
+        chooser.addOption("Romulus", RobotMode.ROMULUS);
+        chooser.addOption("Thor's Hammer", RobotMode.HAMMER);
+        chooser.addOption("T-shirt Cannon", RobotMode.T_SHIRT);
+        chooser.addOption("Frisbee Shooter", RobotMode.FRISBEE);
+
+
         new RobotContainer();
     }
 
@@ -54,6 +78,11 @@ public class Robot extends TimedRobot {
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+    }
+
+    @Override
+    public void teleopInit() {
+
     }
 
 

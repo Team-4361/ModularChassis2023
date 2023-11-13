@@ -15,10 +15,10 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static final int FRONT_LEFT = 1;
-    public static final int FRONT_RIGHT = 2;
-    public static final int BACK_LEFT = 3;
-    public static final int BACK_RIGHT = 4;
+    public static final int DRIVE_FRONT_LEFT = 1;
+    public static final int DRIVE_FRONT_RIGHT = 2;
+    public static final int DRIVE_BACK_LEFT = 3;
+    public static final int DRIVE_BACK_RIGHT = 4;
 
     public static final boolean LEFT_SIDE_INVERTED = true;
     public static final boolean RIGHT_SIDE_INVERTED = false;
@@ -26,4 +26,9 @@ public final class Constants {
     public static final int LEFT_STICK = 0;
     public static final int RIGHT_STICK = 1;
     public static final int XBOX_CONTROLLER = 2;
+
+    public static final int MOD_TALON_1 = 8;
+    public static final int MOD_TALON_2 = 5;
+    public static final int MOD_TALON_3 = 7;
+    public static final int MOD_TALON_4 = 6;
 }

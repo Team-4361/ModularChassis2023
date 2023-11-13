@@ -6,26 +6,28 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.commands.TankDriveCommand;
 
-public class DriveSubsystem extends SubsystemBase{
+public class DriveSubsystem extends SubsystemBase {
     private WPI_TalonSRX fr, fl, br, bl;
-    private MotorControllerGroup left, right;
+    private MotorControllerGroup leftSide, rightSide;
     private DifferentialDrive drive;
     
     public DriveSubsystem(){
-        fl = new WPI_TalonSRX(Constants.FRONT_LEFT); 
-        fr = new WPI_TalonSRX(Constants.FRONT_RIGHT);
-        bl = new WPI_TalonSRX(Constants.BACK_LEFT);
-        br = new WPI_TalonSRX(Constants.BACK_RIGHT);
-        left = new MotorControllerGroup(fl, bl);
-        right = new MotorControllerGroup(fr, br);
-        left.setInverted(Constants.LEFT_SIDE_INVERTED);
-        right.setInverted(Constants.RIGHT_SIDE_INVERTED);
-        drive = new DifferentialDrive(left, right);
+        fl = new WPI_TalonSRX(Constants.DRIVE_FRONT_LEFT);
+        fr = new WPI_TalonSRX(Constants.DRIVE_FRONT_RIGHT);
+        bl = new WPI_TalonSRX(Constants.DRIVE_BACK_LEFT);
+        br = new WPI_TalonSRX(Constants.DRIVE_BACK_RIGHT);
 
+        leftSide = new MotorControllerGroup(fl, bl);
+        rightSide = new MotorControllerGroup(fr, br);
+
+        leftSide.setInverted(Constants.LEFT_SIDE_INVERTED);
+        rightSide.setInverted(Constants.RIGHT_SIDE_INVERTED);
+
+        drive = new DifferentialDrive(leftSide, rightSide);
         drive.setDeadband(0.05);
-
-
+        setDefaultCommand(new TankDriveCommand());
     }
     
     public void tankDrive(double leftInput, double rightInput){
